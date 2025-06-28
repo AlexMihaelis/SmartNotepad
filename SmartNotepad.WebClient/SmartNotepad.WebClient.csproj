@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Exercise\ListBoards.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Exercise\ListBoards.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SmartNotepad.Data\SmartNotepad.Data.csproj" />
+  </ItemGroup>
+
+</Project>

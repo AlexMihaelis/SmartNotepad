@@ -1,0 +1,6 @@
+@SmartNotepad.API_HostAddress = http://localhost:5162
+
+GET {{SmartNotepad.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

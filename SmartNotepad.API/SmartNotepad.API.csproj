@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SmartNotepad.Application\SmartNotepad.Application.csproj" />
+    <ProjectReference Include="..\SmartNotepad.Data\SmartNotepad.Data.csproj" />
+    <ProjectReference Include="..\SmartNotepad.Domain.Services\SmartNotepad.Domain.Services.csproj" />
+    <ProjectReference Include="..\SmartNotepad.Domain\SmartNotepad.Domain.csproj" />
+    <ProjectReference Include="..\SmartNotepad.WebClient\SmartNotepad.WebClient.csproj" />
+  </ItemGroup>
+
+</Project>
