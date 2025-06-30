@@ -24,6 +24,7 @@ namespace SmartNotepad.API.Controllers
             var result = await _noteService.GetNotesAsync();
             var note = result.Select(note => new NoteDTO
             {
+                Id = note.Id,
                 Title = note.Title,
                 Content = note.Content,
                 UserId = note.UserId

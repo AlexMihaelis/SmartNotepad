@@ -15,14 +15,8 @@ namespace SmartNotepad.Domain.Models
         public string Password { get; set; }
         public DateOnly RegistrDate { get; set; }
         public DateOnly DateBirth { get; set; }
-        // Избегаем циклической ссылки
-        [JsonIgnore]
         public IEnumerable<Note> Notes { get; set; }
-        // Избегаем циклической ссылки
-        [JsonIgnore]
         public IEnumerable<Recipe> Recipes { get; set; }
-        // Избегаем циклической ссылки
-        [JsonIgnore]
         public IEnumerable<Board> Boards { get; set; }
     }
 }
