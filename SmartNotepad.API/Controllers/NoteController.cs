@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using SmartNotepad.Application.DTOs;
 using SmartNotepad.Domain;
 using SmartNotepad.Domain.Models;
@@ -8,6 +9,7 @@ namespace SmartNotepad.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [EnableCors("MyPolicy")]
     public class NoteController : ControllerBase
     {
         //private readonly ILogger<NotesController> _logger;
@@ -27,6 +29,8 @@ namespace SmartNotepad.API.Controllers
                 Id = note.Id,
                 Title = note.Title,
                 Content = note.Content,
+                CreationDate = note.CreationDate,
+                LastModifDate = note.LastModifDate,
                 UserId = note.UserId
             }).ToList();
             return Ok(note);
@@ -59,6 +63,7 @@ namespace SmartNotepad.API.Controllers
 
             existingNote.Title = note.Title;
             existingNote.Content = note.Content;
+            existingNote.LastModifDate = DateTime.UtcNow;
             existingNote.UserId = note.UserId;
             await _noteService.UpdateNotesAsync(existingNote);
             return NoContent(); // Статус 204, без содержимого

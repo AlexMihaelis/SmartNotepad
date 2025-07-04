@@ -11,6 +11,8 @@ namespace SmartNotepad.Application.DTOs
         public int? Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
+        public DateTime CreationDate { get; set; }
+        public DateTime LastModifDate { get; set; }
         public int UserId { get; set; } 
     }
 }
