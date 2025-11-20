@@ -54,4 +54,5 @@ namespace SmartNotepad.Data.Repositories.Repositories.Implementation
             await _context.SaveChangesAsync(); // Сохранение изменений в базе данных
         }
     }
+
 }

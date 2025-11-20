@@ -47,7 +47,6 @@ namespace SmartNotepad.Domain.Services.Services.Implementation
         // Редактирование
         public async Task UpdateNotesAsync(Note note)
         {
-            note.LastModifDate = DateTime.UtcNow; // Обновление даты последнего изменения
             await _noteRepository.UpdateNoteAsync(note);
         }
     }

@@ -8,14 +8,13 @@ namespace SmartNotepad.Application.DTOs
 {
     public class RecipeDTO
     {
+        public string? Image { get; set; }
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int CookingTime { get; set; } 
         public int Servings { get; set; } 
-        public DateOnly CreationDate { get; set; } 
+        public DateTime CreationDate { get; set; } 
         public int UserId { get; set; } 
-        public int RecipeCategoryId { get; set; } 
-        public int RecipeTagId { get; set; } 
     }
 }

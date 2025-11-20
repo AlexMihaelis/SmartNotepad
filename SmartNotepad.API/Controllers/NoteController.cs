@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SmartNotepad.Application.DTOs;
+using SmartNotepad.Data.Context;
 using SmartNotepad.Domain;
 using SmartNotepad.Domain.Models;
 using SmartNotepad.Domain.Services.Services;
@@ -14,25 +16,36 @@ namespace SmartNotepad.API.Controllers
     {
         //private readonly ILogger<NotesController> _logger;
         private readonly INoteService _noteService;
+        private readonly AppDbContext _context;
 
-        public NoteController(INoteService noteService)
+        public NoteController(INoteService noteService, AppDbContext context)
         {
             _noteService = noteService;
+            _context = context;
+
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetNotesAsync()
+        public async Task<IActionResult> GetNotesAsync([FromQuery] int pageSize = 8, [FromQuery] int page = 1)
         {
-            var result = await _noteService.GetNotesAsync();
-            var note = result.Select(note => new NoteDTO
-            {
-                Id = note.Id,
-                Title = note.Title,
-                Content = note.Content,
-                CreationDate = note.CreationDate,
-                LastModifDate = note.LastModifDate,
-                UserId = note.UserId
-            }).ToList();
+
+            int totalCount = await _context.Notes.CountAsync(); // Получение общего кол-во элементов
+            var note = await _context.Notes
+               .OrderBy(n => n.Id)
+               .ThenBy(n => n.LastModifDate)
+               .Skip((page - 1) * pageSize)
+               .Take(pageSize)
+               .Select(note => new NoteDTO
+               {
+                   Id = note.Id,
+                   Title = note.Title,
+                   Content = note.Content,
+                   CreationDate = note.CreationDate,
+                   LastModifDate = note.LastModifDate,
+                   UserId = note.UserId
+               }).ToListAsync();
+                
+
             return Ok(note);
         }
 
@@ -45,6 +58,7 @@ namespace SmartNotepad.API.Controllers
             model.Title = note.Title;
             model.Content = note.Content;
             model.UserId = note.UserId;
+            model.CreationDate = DateTime.Now;
 
             await _noteService.AddNotesAsync(model);
             return Created();
@@ -63,7 +77,7 @@ namespace SmartNotepad.API.Controllers
 
             existingNote.Title = note.Title;
             existingNote.Content = note.Content;
-            existingNote.LastModifDate = DateTime.UtcNow;
+            existingNote.LastModifDate = DateTime.Now;
             existingNote.UserId = note.UserId;
             await _noteService.UpdateNotesAsync(existingNote);
             return NoContent(); // Статус 204, без содержимого

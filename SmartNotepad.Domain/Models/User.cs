@@ -9,6 +9,7 @@ namespace SmartNotepad.Domain.Models
 {
     public class User
     {
+        public string? Image { get; set; } = null;
         public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }

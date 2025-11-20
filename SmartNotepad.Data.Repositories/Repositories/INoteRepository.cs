@@ -12,6 +12,8 @@ namespace SmartNotepad.Data.Repositories.Repositories
         // Метод для асинхронного получения списка заметок
         Task<IEnumerable<Note>> GetNotesAsync();
 
+        //IQueryable<Note> GetNotesQueryable();
+
         // Метод для асинхронного добавление заметки
         Task AddNoteAsync(Note note);
 

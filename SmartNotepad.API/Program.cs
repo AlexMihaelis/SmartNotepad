@@ -22,8 +22,8 @@ builder.Services.AddScoped<IBoardRepository, BoardRepository>();
 builder.Services.AddScoped<IExerciseService, ExerciseService>();
 builder.Services.AddScoped<IExerciseRepository, ExerciseRepository>();
 
-builder.Services.AddScoped<IRecipeService, RecipeService>();
-builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
+builder.Services.AddScoped<IRecipesService, RecipesService>();
+builder.Services.AddScoped<IRecipesRepository, RecipesRepository>();
 
 builder.Services.AddDbContext<AppDbContext>();
 
